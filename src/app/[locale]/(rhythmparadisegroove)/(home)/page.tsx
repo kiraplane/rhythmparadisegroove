@@ -11,7 +11,7 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return constructMetadata({
-    title: 'Rhythm Paradise Groove Wiki - Perfects, Minigames and Timing Guide',
+    title: 'Rhythm Paradise Groove Wiki - Minigames Perfects and Guides',
     description:
       'Rhythm Paradise Groove Wiki covers Perfect routes, minigame cues, TV calibration, demo setup, Beatspell, multiplayer, and Switch timing.',
     locale,
