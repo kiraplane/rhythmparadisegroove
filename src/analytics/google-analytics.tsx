@@ -1,9 +1,14 @@
 import Script from 'next/script';
 
-const GOOGLE_ANALYTICS_ID = 'G-VQK2CQFCJ9';
+const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+const TEMPLATE_GOOGLE_ANALYTICS_IDS = new Set(['G-VQK2CQFCJ9']);
 
 export default function GoogleAnalytics() {
-  if (process.env.NODE_ENV !== 'production') {
+  if (
+    process.env.NODE_ENV !== 'production' ||
+    !GOOGLE_ANALYTICS_ID ||
+    TEMPLATE_GOOGLE_ANALYTICS_IDS.has(GOOGLE_ANALYTICS_ID)
+  ) {
     return null;
   }
 
