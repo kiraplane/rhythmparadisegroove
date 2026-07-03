@@ -1,4 +1,5 @@
 import { minigames } from './minigames';
+import { priorityPageLabels, priorityPages } from './p0-pages';
 import { remixes } from './remixes';
 import { CHECKED_AT, officialGameFacts, siteDescription } from './sources';
 import type { Guide, GuideCategory, GuideVideo } from './types';
@@ -80,6 +81,7 @@ export const relatedRouteLabels: Record<string, string> = {
   '/guides': 'All Guides',
   '/minigames': 'Minigames Hub',
   '/remixes': 'Remixes Hub',
+  ...priorityPageLabels,
   '/perfect': 'Perfect Route',
   '/walkthrough': 'Walkthrough Hub',
   '/demo': 'Demo Guide',
@@ -302,6 +304,8 @@ export const guides: Guide[] = [
     tags: ['Calibration', 'TV Mode', 'Input Lag'],
     relatedRoutes: [
       '/setup',
+      '/setup/handheld-vs-tv',
+      '/setup/bluetooth-audio-lag',
       '/demo',
       '/guides/beginner-guide',
       '/guides/perfect-solo-minigames',
@@ -384,7 +388,14 @@ export const guides: Guide[] = [
       'Rhythm Heaven Groove demo',
     ],
     tags: ['Demo', 'Save Data', 'Switch'],
-    relatedRoutes: ['/demo', '/setup', '/release', '/guides/beginner-guide'],
+    relatedRoutes: [
+      '/demo',
+      '/demo/minigames',
+      '/demo/demo-vs-full-game',
+      '/setup',
+      '/release',
+      '/guides/beginner-guide',
+    ],
     body: [
       {
         heading: 'Treat the demo as a timing test, not only a preview',
@@ -456,6 +467,8 @@ export const guides: Guide[] = [
     ],
     tags: ['Beatspell', 'Modes', 'Dungeon'],
     relatedRoutes: [
+      '/beatspell',
+      '/beatspell/how-to-unlock',
       '/modes',
       '/guides/beginner-guide',
       '/guides/perfect-solo-minigames',
@@ -532,7 +545,13 @@ export const guides: Guide[] = [
       'Rhythm Paradise Groove 4 players',
     ],
     tags: ['Multiplayer', 'Party', 'Local Play'],
-    relatedRoutes: ['/modes', '/setup', '/guides/tv-calibration-input-lag'],
+    relatedRoutes: [
+      '/multiplayer',
+      '/multiplayer/all-minigames',
+      '/modes',
+      '/setup',
+      '/guides/tv-calibration-input-lag',
+    ],
     body: [
       {
         heading: 'Use one fair timing setup for everyone',
@@ -601,6 +620,9 @@ export const guides: Guide[] = [
     relatedRoutes: [
       '/walkthrough',
       '/minigames',
+      '/remixes',
+      '/beatspell',
+      '/multiplayer',
       '/guides/perfect-solo-minigames',
       '/guides/beatspell-guide',
     ],
@@ -729,6 +751,7 @@ export const allCoreRoutes = [
   '/guides',
   '/minigames',
   '/remixes',
+  ...priorityPages.map((page) => page.route),
   '/walkthrough',
   '/demo',
   '/setup',

@@ -33,6 +33,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             : route === Routes.Guides ||
                 route === Routes.Minigames ||
                 route === Routes.Remixes ||
+                route === Routes.Multiplayer ||
+                route === Routes.Beatspell ||
                 route === Routes.Setup ||
                 route === Routes.Demo ||
                 route === Routes.Modes ||

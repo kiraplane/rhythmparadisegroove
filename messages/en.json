@@ -313,6 +313,8 @@
         "items": {
           "minigames": "Minigames",
           "remixes": "Remixes",
+          "beatspell": "Beatspell",
+          "multiplayer": "Multiplayer",
           "walkthrough": "Walkthrough",
           "setup": "Timing Setup",
           "modes": "Modes"

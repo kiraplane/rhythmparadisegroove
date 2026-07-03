@@ -49,7 +49,7 @@ export const topicPages = {
       {
         question: 'Does this wiki list every minigame yet?',
         answer:
-          'It now lists 30 verified base Solo minigames, 30 evolved 2 versions, and 20 Remix route pages. Multiplayer-specific games should be added separately when source material is strong enough.',
+          'It now lists 30 verified base Solo minigames, 30 evolved 2 versions, 20 Remix route pages, and a first multiplayer minigame route guide.',
       },
       {
         question: 'What is the best first minigame goal?',
@@ -124,7 +124,13 @@ export const topicPages = {
       'The demo is the best way to test timing and device setup before committing to Perfect attempts or the full game.',
     image: commonImage,
     updatedAt: OFFICIAL_CHECKED_AT,
-    featuredRoutes: ['/guides/demo-save-transfer', '/setup', '/release'],
+    featuredRoutes: [
+      '/demo/minigames',
+      '/demo/demo-vs-full-game',
+      '/guides/demo-save-transfer',
+      '/setup',
+      '/release',
+    ],
     sections: [
       {
         heading: 'Nintendo confirms a free demo',
@@ -167,6 +173,8 @@ export const topicPages = {
     image: commonImage,
     updatedAt: CHECKED_AT,
     featuredRoutes: [
+      '/setup/handheld-vs-tv',
+      '/setup/bluetooth-audio-lag',
       '/guides/tv-calibration-input-lag',
       '/demo',
       '/guides/perfect-solo-minigames',
@@ -219,6 +227,9 @@ export const topicPages = {
     image: commonImage,
     updatedAt: CHECKED_AT,
     featuredRoutes: [
+      '/beatspell',
+      '/beatspell/how-to-unlock',
+      '/multiplayer',
       '/guides/beatspell-guide',
       '/guides/multiplayer-party-guide',
       '/walkthrough',

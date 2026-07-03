@@ -22,6 +22,16 @@ export function useFooterLinks(): NestedMenuItem[] {
           external: false,
         },
         {
+          title: t('wiki.items.beatspell'),
+          href: Routes.Beatspell,
+          external: false,
+        },
+        {
+          title: t('wiki.items.multiplayer'),
+          href: Routes.Multiplayer,
+          external: false,
+        },
+        {
           title: t('wiki.items.walkthrough'),
           href: Routes.Walkthrough,
           external: false,

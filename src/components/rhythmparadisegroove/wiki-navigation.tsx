@@ -79,8 +79,11 @@ const wikiNavGroups: WikiNavGroup[] = [
       { href: '/', label: 'Home' },
       { href: '/guides/beginner-guide', label: 'Beginner Guide' },
       { href: '/demo', label: 'Demo' },
+      { href: '/demo/minigames', label: 'Demo Minigames' },
+      { href: '/demo/demo-vs-full-game', label: 'Demo vs Full Game' },
       { href: '/setup', label: 'Timing Setup' },
     ],
+    activePrefixes: ['/demo'],
   },
   {
     title: 'Perfects',
@@ -90,8 +93,11 @@ const wikiNavGroups: WikiNavGroup[] = [
       { href: '/minigames', label: 'Minigames Hub' },
       { href: '/remixes', label: 'Remixes Hub' },
       { href: '/guides/tv-calibration-input-lag', label: 'TV Calibration' },
+      { href: '/setup/handheld-vs-tv', label: 'Handheld vs TV' },
+      { href: '/setup/bluetooth-audio-lag', label: 'Bluetooth Audio Lag' },
       { href: '/walkthrough', label: 'Walkthrough Hub' },
     ],
+    activePrefixes: ['/setup'],
   },
   {
     title: 'Frontside Minigames',
@@ -135,11 +141,16 @@ const wikiNavGroups: WikiNavGroup[] = [
     icon: Music2,
     links: [
       { href: '/modes', label: 'Modes Hub' },
-      { href: '/guides/beatspell-guide', label: 'Beatspell' },
-      { href: '/guides/multiplayer-party-guide', label: 'Multiplayer' },
+      { href: '/beatspell', label: 'Beatspell' },
+      { href: '/beatspell/how-to-unlock', label: 'Beatspell Unlock' },
+      { href: '/multiplayer', label: 'Multiplayer' },
+      { href: '/multiplayer/all-minigames', label: 'All Multiplayer Games' },
+      { href: '/guides/beatspell-guide', label: 'Beatspell Legacy Guide' },
+      { href: '/guides/multiplayer-party-guide', label: 'Party Setup Guide' },
       { href: '/release', label: 'Release Info' },
       { href: '/links', label: 'Official Links' },
     ],
+    activePrefixes: ['/beatspell', '/multiplayer'],
   },
 ] as const;
 

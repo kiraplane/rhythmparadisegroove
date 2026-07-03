@@ -47,8 +47,8 @@ const primaryLinks = [
   },
   {
     title: 'Beatspell',
-    body: 'Rhythm-first advice for the RPG-flavored dungeon mode.',
-    href: '/guides/beatspell-guide',
+    body: 'Use the RPG-flavored side mode without losing rhythm-first timing.',
+    href: '/beatspell',
     icon: Sparkles,
   },
   {
@@ -65,8 +65,8 @@ const primaryLinks = [
   },
   {
     title: 'Multiplayer',
-    body: 'Set up fair local play for 1-4 players and mixed skill levels.',
-    href: '/guides/multiplayer-party-guide',
+    body: 'Set up fair local play and route the party mode by cue clarity.',
+    href: '/multiplayer',
     icon: Users,
   },
 ];
@@ -106,22 +106,44 @@ const keywordLinks = [
     href: '/minigames/synchro-wings',
   },
   { keyword: 'rhythm paradise groove demo', href: '/demo' },
+  { keyword: 'rhythm paradise groove demo minigames', href: '/demo/minigames' },
+  {
+    keyword: 'rhythm paradise groove demo vs full game',
+    href: '/demo/demo-vs-full-game',
+  },
   {
     keyword: 'rhythm paradise groove beatspell',
-    href: '/guides/beatspell-guide',
+    href: '/beatspell',
+  },
+  {
+    keyword: 'how to unlock beatspell',
+    href: '/beatspell/how-to-unlock',
+  },
+  { keyword: 'rhythm paradise groove multiplayer', href: '/multiplayer' },
+  {
+    keyword: 'all multiplayer minigames',
+    href: '/multiplayer/all-minigames',
   },
   { keyword: 'rhythm paradise groove calibration', href: '/setup' },
+  {
+    keyword: 'handheld vs tv timing',
+    href: '/setup/handheld-vs-tv',
+  },
+  {
+    keyword: 'bluetooth audio lag',
+    href: '/setup/bluetooth-audio-lag',
+  },
 ];
 
 const startSteps = [
   {
     title: 'Test timing',
-    href: '/setup',
+    href: '/setup/handheld-vs-tv',
     body: 'Use handheld as the baseline, then fix TV and audio delay.',
   },
   {
     title: 'Play the demo',
-    href: '/guides/demo-save-transfer',
+    href: '/demo/minigames',
     body: 'Check save transfer and compare handheld against TV mode.',
   },
   {
@@ -152,6 +174,11 @@ const latestUpdateItems = [
     date: '2026-07-03',
     body: '30 base Solo guides, 30 evolved 2 guides, and 20 Remix route pages now link together for Perfect practice.',
   },
+  {
+    title: 'P0 mode and setup pages added',
+    date: '2026-07-03',
+    body: 'Beatspell, multiplayer, demo, handheld vs TV, and Bluetooth audio pages now cover the next high-intent questions.',
+  },
 ];
 
 const popularMinigameSlugs = [
@@ -176,6 +203,20 @@ const popularRemixes = popularRemixNumbers.flatMap((number) =>
 );
 
 const homeTopicLinks = [
+  {
+    route: '/beatspell',
+    label: 'Beatspell',
+    eyebrow: 'Side Mode',
+    summary:
+      'A full rhythm-combat guide for Beatspell, including setup, fight pressure, and unlock context.',
+  },
+  {
+    route: '/multiplayer',
+    label: 'Multiplayer',
+    eyebrow: 'Local Play',
+    summary:
+      'Local party setup, multiplayer route advice, shared audio, player rotation, and all multiplayer minigame planning.',
+  },
   {
     route: '/remixes',
     label: 'Remixes',
@@ -430,7 +471,7 @@ export function RhythmParadiseGrooveHomePage() {
                   Launch notes and guide status
                 </h2>
               </div>
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {latestUpdateItems.map((item) => (
                   <article
                     key={item.title}
