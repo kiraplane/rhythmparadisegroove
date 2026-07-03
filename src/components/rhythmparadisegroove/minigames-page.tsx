@@ -5,7 +5,9 @@ import { LastUpdated } from '@/components/rhythmparadisegroove/last-updated';
 import { JsonLd } from '@/components/seo/json-ld';
 import { Badge } from '@/components/ui/badge';
 import {
+  flipsideEvolvedMinigames,
   flipsideMinigames,
+  frontsideEvolvedMinigames,
   frontsideMinigames,
   minigameGuideSources,
   minigames,
@@ -25,7 +27,7 @@ const hubFaq = [
   {
     question: 'Does this hub cover every Rhythm Paradise Groove minigame?',
     answer:
-      'This first version covers the 30 verified base Solo minigames from the Frontside and Flipside route. Evolved versions, remixes, and multiplayer games should be added after they have enough verified source material.',
+      'This hub now covers the 30 verified base Solo minigames plus their 30 evolved 2 versions. Remix pages are handled as route-style guides because they mix multiple cue families together.',
   },
   {
     question: 'Are these pages written only for Perfect attempts?',
@@ -133,7 +135,7 @@ export function MinigamesPage() {
         '@type': 'ItemList',
         name: 'Rhythm Paradise Groove Base Solo Minigame Guides',
         description:
-          'Verified first-version guide index for 30 base Solo minigames in Rhythm Paradise Groove.',
+          'Guide index for 60 Solo minigame pages in Rhythm Paradise Groove, covering base games and evolved 2 versions.',
         itemListElement: minigames.map((minigame, index) => ({
           '@type': 'ListItem',
           position: index + 1,
@@ -174,17 +176,17 @@ export function MinigamesPage() {
               variant="outline"
               className="border-[#201736]/15 text-[#5F5378]"
             >
-              30 base Solo pages
+              60 Solo pages
             </Badge>
           </div>
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-black md:text-6xl">
             Rhythm Paradise Groove Minigame Guides
           </h1>
           <p className="mt-5 max-w-4xl text-[#4B3E68] text-lg leading-8">
-            This hub is the first playable guide layer for the 30 verified base
-            Solo minigames. Each page explains the cue in plain English, the
-            response the player should trust, and the specific mistake that
-            tends to break a Perfect run.
+            This hub is the playable guide layer for the 30 verified base Solo
+            minigames and their 30 evolved 2 versions. Each page explains the
+            cue in plain English, the response the player should trust, and the
+            specific mistake that tends to break a Perfect run.
           </p>
           <div className="mt-5">
             <LastUpdated date={minigames[0]?.updatedAt ?? '2026-07-03'} />
@@ -235,7 +237,7 @@ export function MinigamesPage() {
             {
               icon: Sparkles,
               title: 'What is verified',
-              text: 'The page set starts with the base Solo minigames that have current launch-week guide and gameplay cross-checks.',
+              text: 'The page set covers the base Solo minigames and the evolved 2 versions that complete the non-Remix Solo route.',
             },
             {
               icon: ListMusic,
@@ -275,6 +277,18 @@ export function MinigamesPage() {
           items={flipsideMinigames}
         />
 
+        <MinigameGroup
+          title="Frontside Evolved 2 Minigames"
+          summary="The evolved Frontside pages revisit the same cue families with less tolerance for lazy timing. Use the original page as a warm-up, then read the 2 version when the old habit starts breaking Perfect attempts."
+          items={frontsideEvolvedMinigames}
+        />
+
+        <MinigameGroup
+          title="Flipside Evolved 2 Minigames"
+          summary="The evolved Flipside pages are sharper checks on response discipline, phrase copying, and recovery. These are best tackled after the base Flipside cue already feels readable."
+          items={flipsideEvolvedMinigames}
+        />
+
         <section className="rounded-lg border border-[#201736]/15 bg-white p-6 text-[#4B3E68] text-sm leading-7 md:p-8">
           <h2 className="font-display text-2xl font-bold text-[#201736]">
             Source note
@@ -283,7 +297,7 @@ export function MinigamesPage() {
             This first version uses current launch-week references to avoid
             making thin or guessed pages. The main verification sources are{' '}
             {minigameGuideSources.map((source, index) => (
-              <span key={source.url}>
+              <span key={`${source.label}-${source.url}`}>
                 <a
                   href={source.url}
                   target="_blank"

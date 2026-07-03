@@ -8,11 +8,7 @@ import { LastUpdated } from '@/components/rhythmparadisegroove/last-updated';
 import { JsonLd } from '@/components/seo/json-ld';
 import { Badge } from '@/components/ui/badge';
 import { relatedRouteLabels } from '@/data/rhythmparadisegroove/guides';
-import {
-  getAdjacentMinigames,
-  getMinigameGuide,
-  minigames,
-} from '@/data/rhythmparadisegroove/minigames';
+import { getRemixGuide, remixes } from '@/data/rhythmparadisegroove/remixes';
 import { officialGameFacts } from '@/data/rhythmparadisegroove/sources';
 import { LocaleLink } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
@@ -20,33 +16,17 @@ import { constructMetadata } from '@/lib/metadata';
 import {
   ArrowLeft,
   ArrowRight,
-  Headphones,
   ListMusic,
+  RotateCcw,
   Trophy,
 } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { notFound } from 'next/navigation';
 
-const difficultyPracticeCopy = {
-  Beginner:
-    'This is a reasonable early Perfect target, but only after the cue feels automatic. If you still have to stare at the animation to survive the stage, keep it as a clear practice page for a little longer.',
-  Intermediate:
-    'This is a good cleanup target once one mistake is clearly responsible for most failures. If the miss keeps changing, the page is still asking for normal practice rather than Perfect-window pressure.',
-  Advanced:
-    'This is a focused cleanup target, not a page to brute-force while tired. Treat a Perfect attempt like a short session: warm up, name the risky cue, take a few serious runs, then stop if your timing gets noisy. If you cannot hum the cue away from the screen, the page still needs listening practice.',
-};
-
-const sidePracticeCopy = {
-  Frontside:
-    'Because this sits in the Frontside Solo route, it also teaches habits that return later: cue trust, visual filtering, and keeping the beat alive when the scene changes.',
-  Flipside:
-    'Because this sits in the Flipside Solo route, it is worth treating the page as a sharper rhythm check. The ideas tend to be shorter, stricter, and less forgiving when you play by sight alone.',
-};
-
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    minigames.map((minigame) => ({ locale, slug: minigame.slug }))
+    remixes.map((remix) => ({ locale, slug: remix.slug }))
   );
 }
 
@@ -56,17 +36,17 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const minigame = getMinigameGuide(slug);
+  const remix = getRemixGuide(slug);
 
-  if (!minigame) {
+  if (!remix) {
     return {};
   }
 
   return constructMetadata({
-    title: minigame.seoTitle,
-    description: minigame.seoDescription,
+    title: remix.seoTitle,
+    description: remix.seoDescription,
     locale,
-    pathname: `/minigames/${minigame.slug}`,
+    pathname: `/remixes/${remix.slug}`,
     image: '/rhythmparadisegroove/og-image.png',
   });
 }
@@ -75,46 +55,35 @@ function getRelatedLabel(route: string) {
   return relatedRouteLabels[route] ?? (route.replace(/^\/+/, '') || 'Home');
 }
 
-function getDifficultyClass(difficulty: string) {
-  if (difficulty === 'Beginner') {
-    return 'border-[#00A7A7]/30 bg-[#C7FFF3] text-[#0D5F63]';
-  }
-
-  if (difficulty === 'Intermediate') {
-    return 'border-[#FFE14A]/60 bg-[#FFF8D1] text-[#6E5200]';
-  }
-
-  return 'border-[#F24C7C]/30 bg-[#FFEAF1] text-[#B51F52]';
-}
-
-export default async function MinigameDetailPage({
+export default async function RemixDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const minigame = getMinigameGuide(slug);
+  const remix = getRemixGuide(slug);
 
-  if (!minigame) {
+  if (!remix) {
     notFound();
   }
 
-  const adjacent = getAdjacentMinigames(minigame.slug);
+  const previous = remixes[remix.number - 2];
+  const next = remixes[remix.number];
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'Article',
-        headline: minigame.title,
-        description: minigame.summary,
-        datePublished: minigame.updatedAt,
-        dateModified: minigame.updatedAt,
+        headline: remix.title,
+        description: remix.summary,
+        datePublished: remix.updatedAt,
+        dateModified: remix.updatedAt,
         image: `${officialGameFacts.domain}/rhythmparadisegroove/og-image.png`,
         author: {
           '@type': 'Organization',
           name: officialGameFacts.siteName,
         },
-        mainEntityOfPage: `${officialGameFacts.domain}/minigames/${minigame.slug}`,
+        mainEntityOfPage: `${officialGameFacts.domain}/remixes/${remix.slug}`,
       },
       {
         '@type': 'BreadcrumbList',
@@ -128,14 +97,14 @@ export default async function MinigameDetailPage({
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Minigames',
-            item: `${officialGameFacts.domain}/minigames`,
+            name: 'Remixes',
+            item: `${officialGameFacts.domain}/remixes`,
           },
           {
             '@type': 'ListItem',
             position: 3,
-            name: minigame.name,
-            item: `${officialGameFacts.domain}/minigames/${minigame.slug}`,
+            name: remix.name,
+            item: `${officialGameFacts.domain}/remixes/${remix.slug}`,
           },
         ],
       },
@@ -149,62 +118,54 @@ export default async function MinigameDetailPage({
       <Container className="px-4">
         <article className="rounded-lg border border-[#201736]/15 bg-white p-6 md:p-8">
           <div className="flex flex-wrap gap-2">
-            <Badge className="bg-[#F24C7C] text-white">{minigame.side}</Badge>
+            <Badge className="bg-[#F24C7C] text-white">Remix</Badge>
             <Badge className="bg-[#201736] text-white">
-              {minigame.variant} #{minigame.order}
+              Solo Remix #{remix.number}
             </Badge>
-            {minigame.baseSlug ? (
-              <Badge
-                variant="outline"
-                className="border-[#00A7A7]/30 bg-[#C7FFF3] text-[#0D5F63]"
-              >
-                Evolved from {minigame.baseName}
-              </Badge>
-            ) : null}
             <Badge
               variant="outline"
-              className={getDifficultyClass(minigame.difficulty)}
+              className="border-[#00A7A7]/30 bg-[#C7FFF3] text-[#0D5F63]"
             >
-              {minigame.difficulty}
+              {remix.difficulty}
             </Badge>
           </div>
 
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-black md:text-6xl">
-            {minigame.name} Guide
+            {remix.name} Guide
           </h1>
           <p className="mt-5 max-w-4xl text-[#4B3E68] text-lg leading-8">
-            {minigame.summary}
+            {remix.summary}
           </p>
           <div className="mt-5">
-            <LastUpdated date={minigame.updatedAt} />
+            <LastUpdated date={remix.updatedAt} />
           </div>
 
           <section className="mt-8 grid gap-4 md:grid-cols-3">
             <div className="rounded-lg border border-[#201736]/15 bg-[#FFF8E8] p-4">
               <div className="flex items-center gap-2 font-semibold text-[#201736]">
                 <ListMusic className="size-4 text-[#F24C7C]" />
-                Cue to trust
+                Main test
               </div>
               <p className="mt-2 text-[#4B3E68] text-sm leading-6">
-                {minigame.cueFamily}
+                {remix.focus}
               </p>
             </div>
             <div className="rounded-lg border border-[#201736]/15 bg-[#FFF8E8] p-4">
               <div className="flex items-center gap-2 font-semibold text-[#201736]">
-                <Headphones className="size-4 text-[#F24C7C]" />
-                Input focus
+                <RotateCcw className="size-4 text-[#F24C7C]" />
+                Warm-up rule
               </div>
               <p className="mt-2 text-[#4B3E68] text-sm leading-6">
-                {minigame.inputStyle}
+                {remix.routeNote}
               </p>
             </div>
             <div className="rounded-lg border border-[#201736]/15 bg-[#FFF8E8] p-4">
               <div className="flex items-center gap-2 font-semibold text-[#201736]">
                 <Trophy className="size-4 text-[#F24C7C]" />
-                Perfect risk
+                Perfect target
               </div>
               <p className="mt-2 text-[#4B3E68] text-sm leading-6">
-                {minigame.perfectRisk}
+                Spend windows only when the linked cues feel stable.
               </p>
             </div>
           </section>
@@ -212,7 +173,7 @@ export default async function MinigameDetailPage({
           <AdsterraAdFrame slot="banner-300x250" className="mt-8" label />
 
           <div className="mt-8 space-y-8">
-            {minigame.body.map((section) => (
+            {remix.body.map((section) => (
               <section key={section.heading}>
                 <h2 className="font-display text-2xl font-bold">
                   {section.heading}
@@ -235,66 +196,50 @@ export default async function MinigameDetailPage({
 
           <section className="mt-10 rounded-lg border border-[#201736]/15 bg-[#FFF8E8] p-5">
             <h2 className="font-display text-2xl font-bold">
-              Practice this page in order
+              Warm up these pages first
             </h2>
-            <div className="mt-3 space-y-4 text-[#4B3E68] text-base leading-8">
-              <p>
-                Start with one clear where you only listen for the{' '}
-                {minigame.cueFamily}. On the second clear, pay attention to the{' '}
-                {minigame.inputStyle}. Only after those two parts feel stable
-                should you spend a Perfect window here.
-              </p>
-              <p>
-                If the run breaks at {minigame.perfectRisk}, do not restart
-                blindly. Say the mistake in one sentence, replay that cue in
-                your head, then take the next attempt. This keeps the practice
-                useful instead of turning it into button-mashing with better
-                branding.
-              </p>
-              <p>{difficultyPracticeCopy[minigame.difficulty]}</p>
-              <p>
-                Move on when the page feels explainable, not necessarily when it
-                feels perfect. A good checkpoint is being able to say the cue
-                out loud, predict the input focus, and name the miss without
-                blaming the whole stage. If you cannot do those three things,
-                the next route page will probably hide the same problem under a
-                new costume.
-              </p>
-              <p>
-                {sidePracticeCopy[minigame.side]} If the previous minigame feels
-                easier, use it as a warm-up. If the next minigame suddenly feels
-                rough, come back here and check whether the {minigame.cueFamily}{' '}
-                is actually stable or merely lucky.
-              </p>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {remix.practiceRoutes.map((route) => (
+                <LocaleLink
+                  key={route}
+                  href={route}
+                  className="group flex min-w-0 items-center justify-between gap-3 rounded-md border border-[#201736]/15 bg-white px-4 py-3 text-left transition hover:border-[#F24C7C]"
+                >
+                  <span className="min-w-0 whitespace-normal break-words font-semibold text-[#201736]">
+                    {getRelatedLabel(route)}
+                  </span>
+                  <ArrowRight className="size-4 shrink-0 text-[#00A7A7] transition group-hover:translate-x-0.5" />
+                </LocaleLink>
+              ))}
             </div>
           </section>
 
           <section className="mt-10 grid gap-3 md:grid-cols-2">
-            {adjacent.previous ? (
+            {previous ? (
               <LocaleLink
-                href={`/minigames/${adjacent.previous.slug}`}
+                href={`/remixes/${previous.slug}`}
                 className="group rounded-lg border border-[#201736]/15 bg-white p-4 transition hover:border-[#F24C7C]"
               >
                 <div className="flex items-center gap-2 text-[#5F5378] text-sm">
                   <ArrowLeft className="size-4 text-[#00A7A7]" />
-                  Previous minigame
+                  Previous Remix
                 </div>
                 <h2 className="mt-2 font-display text-xl font-bold text-[#201736]">
-                  {adjacent.previous.name}
+                  {previous.name}
                 </h2>
               </LocaleLink>
             ) : null}
-            {adjacent.next ? (
+            {next ? (
               <LocaleLink
-                href={`/minigames/${adjacent.next.slug}`}
+                href={`/remixes/${next.slug}`}
                 className="group rounded-lg border border-[#201736]/15 bg-white p-4 transition hover:border-[#F24C7C]"
               >
                 <div className="flex items-center justify-between gap-2 text-[#5F5378] text-sm">
-                  <span>Next minigame</span>
+                  <span>Next Remix</span>
                   <ArrowRight className="size-4 text-[#00A7A7]" />
                 </div>
                 <h2 className="mt-2 font-display text-xl font-bold text-[#201736]">
-                  {adjacent.next.name}
+                  {next.name}
                 </h2>
               </LocaleLink>
             ) : null}
@@ -305,7 +250,7 @@ export default async function MinigameDetailPage({
               Related next steps
             </h2>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
-              {minigame.relatedRoutes.map((route) => (
+              {remix.relatedRoutes.map((route) => (
                 <LocaleLink
                   key={route}
                   href={route}
@@ -321,7 +266,7 @@ export default async function MinigameDetailPage({
           </section>
 
           <div className="mt-10">
-            <FaqSection items={minigame.faq} />
+            <FaqSection items={remix.faq} />
           </div>
         </article>
       </Container>

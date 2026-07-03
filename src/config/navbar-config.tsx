@@ -63,10 +63,17 @@ export function useNavbarLinks(): NestedMenuItem[] {
       items: [
         {
           title: 'Minigames',
-          description: '30 base Solo pages with cues and Perfect risks.',
+          description: '60 Solo pages with cues and Perfect risks.',
           href: Routes.Minigames,
           external: false,
           icon: <ListMusic className="size-4" />,
+        },
+        {
+          title: 'Remixes',
+          description: '20 Remix route guides with warm-up links.',
+          href: Routes.Remixes,
+          external: false,
+          icon: <Music2 className="size-4" />,
         },
         {
           title: 'Walkthrough',

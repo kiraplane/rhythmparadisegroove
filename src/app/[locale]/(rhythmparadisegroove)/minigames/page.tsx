@@ -10,10 +10,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   return constructMetadata({
-    title:
-      'Rhythm Paradise Groove Minigames - 30 Base Solo Guides and Perfect Tips',
+    title: 'Rhythm Paradise Groove Minigames - 60 Solo Guides and Perfect Tips',
     description:
-      'Browse 30 verified Rhythm Paradise Groove base Solo minigame guides with cue notes, Perfect risks, Frontside and Flipside routing.',
+      'Browse 60 Rhythm Paradise Groove Solo minigame guides with base and evolved 2 cue notes, Perfect risks, Frontside and Flipside routing.',
     locale,
     pathname: '/minigames',
     image: '/rhythmparadisegroove/og-image.png',

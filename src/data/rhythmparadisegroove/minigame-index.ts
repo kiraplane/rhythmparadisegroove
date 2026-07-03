@@ -388,3 +388,21 @@ export const frontsideMinigameIndex = minigameIndex.filter(
 export const flipsideMinigameIndex = minigameIndex.filter(
   (minigame) => minigame.side === 'Flipside'
 );
+
+export const evolvedMinigameIndex = minigameIndex.map((minigame) => ({
+  ...minigame,
+  slug: `${minigame.slug}-2`,
+  name: `${minigame.name} 2`,
+  cueFamily: `evolved ${minigame.cueFamily}`,
+  inputStyle: `stricter ${minigame.inputStyle}`,
+  perfectRisk: `carrying ${minigame.name} muscle memory into the evolved timing`,
+  oneLine: `The evolved version of ${minigame.name} keeps the core idea but asks for tighter cue recognition and cleaner recovery.`,
+}));
+
+export const frontsideEvolvedMinigameIndex = evolvedMinigameIndex.filter(
+  (minigame) => minigame.side === 'Frontside'
+);
+
+export const flipsideEvolvedMinigameIndex = evolvedMinigameIndex.filter(
+  (minigame) => minigame.side === 'Flipside'
+);

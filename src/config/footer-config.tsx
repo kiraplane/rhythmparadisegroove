@@ -17,6 +17,11 @@ export function useFooterLinks(): NestedMenuItem[] {
           external: false,
         },
         {
+          title: t('wiki.items.remixes'),
+          href: Routes.Remixes,
+          external: false,
+        },
+        {
           title: t('wiki.items.walkthrough'),
           href: Routes.Walkthrough,
           external: false,

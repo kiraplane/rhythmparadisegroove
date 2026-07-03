@@ -1,4 +1,5 @@
 import { minigames } from './minigames';
+import { remixes } from './remixes';
 import { CHECKED_AT, officialGameFacts, siteDescription } from './sources';
 import type { Guide, GuideCategory, GuideVideo } from './types';
 
@@ -78,6 +79,7 @@ export const relatedRouteLabels: Record<string, string> = {
   '/': 'Rhythm Paradise Groove Wiki',
   '/guides': 'All Guides',
   '/minigames': 'Minigames Hub',
+  '/remixes': 'Remixes Hub',
   '/perfect': 'Perfect Route',
   '/walkthrough': 'Walkthrough Hub',
   '/demo': 'Demo Guide',
@@ -96,6 +98,9 @@ export const relatedRouteLabels: Record<string, string> = {
   '/guides/rhythm-heaven-vs-paradise-name': 'Name Difference',
   ...Object.fromEntries(
     minigames.map((minigame) => [`/minigames/${minigame.slug}`, minigame.name])
+  ),
+  ...Object.fromEntries(
+    remixes.map((remix) => [`/remixes/${remix.slug}`, remix.name])
   ),
 };
 
@@ -723,6 +728,7 @@ export const allCoreRoutes = [
   '/',
   '/guides',
   '/minigames',
+  '/remixes',
   '/walkthrough',
   '/demo',
   '/setup',
@@ -732,4 +738,5 @@ export const allCoreRoutes = [
   '/disclaimer',
   ...guides.map((guide) => `/guides/${guide.slug}`),
   ...minigames.map((minigame) => `/minigames/${minigame.slug}`),
+  ...remixes.map((remix) => `/remixes/${remix.slug}`),
 ];

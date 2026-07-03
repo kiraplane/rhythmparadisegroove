@@ -15,6 +15,7 @@ export enum Routes {
   // Rhythm Paradise Groove wiki routes
   Guides = '/guides',
   Minigames = '/minigames',
+  Remixes = '/remixes',
   Walkthrough = '/walkthrough',
   Demo = '/demo',
   Setup = '/setup',

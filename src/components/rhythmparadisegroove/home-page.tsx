@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { guides, siteDescription } from '@/data/rhythmparadisegroove/guides';
 import { minigameIndex } from '@/data/rhythmparadisegroove/minigame-index';
+import { remixIndex } from '@/data/rhythmparadisegroove/remix-index';
 import {
   officialGameFacts,
   officialQuickLinks,
@@ -17,6 +18,7 @@ import {
   Gamepad2,
   ListMusic,
   Play,
+  RotateCcw,
   Sparkles,
   TimerReset,
   Trophy,
@@ -51,9 +53,15 @@ const primaryLinks = [
   },
   {
     title: 'Minigames',
-    body: 'Open 30 base Solo pages with cue notes and Perfect risks.',
+    body: 'Open 60 Solo pages with cue notes and Perfect risks.',
     href: '/minigames',
     icon: ListMusic,
+  },
+  {
+    title: 'Remixes',
+    body: 'Use 20 route guides to warm up cues and clean transitions.',
+    href: '/remixes',
+    icon: RotateCcw,
   },
   {
     title: 'Multiplayer',
@@ -75,6 +83,8 @@ const keywordLinks = [
     href: '/guides/perfect-solo-minigames',
   },
   { keyword: 'rhythm paradise groove minigames', href: '/minigames' },
+  { keyword: 'rhythm paradise groove remixes', href: '/remixes' },
+  { keyword: 'remix 20 guide', href: '/remixes/remix-20' },
   {
     keyword: 'hoop trundling guide',
     href: '/minigames/hoop-trundling',
@@ -138,9 +148,9 @@ const latestUpdateItems = [
     body: 'The site targets Rhythm Paradise Groove first while mapping Rhythm Heaven Groove alias searches.',
   },
   {
-    title: '30 minigame pages live',
+    title: '80 Solo-route guide pages live',
     date: '2026-07-03',
-    body: 'Frontside and Flipside base Solo minigames now have individual cue, practice, and Perfect-risk pages.',
+    body: '30 base Solo guides, 30 evolved 2 guides, and 20 Remix route pages now link together for Perfect practice.',
   },
 ];
 
@@ -158,6 +168,23 @@ const popularMinigameSlugs = [
 const popularMinigames = popularMinigameSlugs.flatMap((slug) =>
   minigameIndex.filter((minigame) => minigame.slug === slug)
 );
+
+const popularRemixNumbers = [1, 5, 8, 12, 16, 20];
+
+const popularRemixes = popularRemixNumbers.flatMap((number) =>
+  remixIndex.filter((remix) => remix.number === number)
+);
+
+const homeTopicLinks = [
+  {
+    route: '/remixes',
+    label: 'Remixes',
+    eyebrow: 'Route Hub',
+    summary:
+      'Twenty Remix route guides that connect warm-up minigames, transition risks, and Perfect cleanup decisions.',
+  },
+  ...topicPageList,
+];
 
 export function RhythmParadiseGrooveHomePage() {
   const latestGuides = guides.slice(0, 6);
@@ -195,9 +222,11 @@ export function RhythmParadiseGrooveHomePage() {
       {
         '@type': 'VideoObject',
         name: 'Rhythm Paradise Groove overview trailer',
+        description:
+          'Official Nintendo UK overview trailer for Rhythm Paradise Groove, used as a source reference for the 2026 Switch rhythm game.',
         thumbnailUrl: 'https://i.ytimg.com/vi/dIqElv-ewbg/hqdefault.jpg',
         embedUrl: 'https://www.youtube.com/embed/dIqElv-ewbg',
-        uploadDate: '2026-04-02',
+        uploadDate: '2026-04-02T00:00:00+00:00',
       },
     ],
   };
@@ -440,7 +469,7 @@ export function RhythmParadiseGrooveHomePage() {
                   href="/minigames"
                   className="font-semibold text-[#D93969] text-sm hover:underline"
                 >
-                  All 30 minigames
+                  All 60 Solo pages
                 </LocaleLink>
               </div>
               <div className="grid gap-3 md:grid-cols-2">
@@ -480,6 +509,68 @@ export function RhythmParadiseGrooveHomePage() {
                         Perfect risk:
                       </span>{' '}
                       {minigame.perfectRisk}
+                    </p>
+                  </LocaleLink>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <div className="mb-4 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+                <div>
+                  <Badge className="bg-[#201736] text-white">
+                    Popular remixes
+                  </Badge>
+                  <h2 className="mt-3 font-display text-3xl font-black">
+                    Practice the routes that combine everything
+                  </h2>
+                  <p className="mt-2 max-w-3xl text-[#5F5378] text-sm leading-6">
+                    Remix pages link back to the minigames that matter first,
+                    then explain the transition habit that usually breaks a
+                    Perfect run.
+                  </p>
+                </div>
+                <LocaleLink
+                  href="/remixes"
+                  className="font-semibold text-[#D93969] text-sm hover:underline"
+                >
+                  All 20 remixes
+                </LocaleLink>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {popularRemixes.map((remix) => (
+                  <LocaleLink
+                    key={remix.slug}
+                    href={`/remixes/${remix.slug}`}
+                    className="group rounded-lg border border-[#201736]/15 bg-white p-4 transition hover:border-[#F24C7C] hover:shadow-sm"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap gap-2">
+                          <Badge className="bg-[#201736] text-white">
+                            Remix #{remix.number}
+                          </Badge>
+                          <Badge
+                            variant="outline"
+                            className="border-[#00A7A7]/30 bg-[#C7FFF3] text-[#0D5F63]"
+                          >
+                            {remix.difficulty}
+                          </Badge>
+                        </div>
+                        <h3 className="mt-3 font-display text-xl font-bold text-[#201736] group-hover:text-[#D93969]">
+                          {remix.name}
+                        </h3>
+                      </div>
+                      <ArrowRight className="mt-1 size-4 shrink-0 text-[#00A7A7] transition group-hover:translate-x-0.5" />
+                    </div>
+                    <p className="mt-2 text-[#5F5378] text-sm leading-6">
+                      {remix.focus}
+                    </p>
+                    <p className="mt-3 text-[#4B3E68] text-xs leading-5">
+                      <span className="font-semibold text-[#201736]">
+                        Route note:
+                      </span>{' '}
+                      {remix.routeNote}
                     </p>
                   </LocaleLink>
                 ))}
@@ -557,7 +648,7 @@ export function RhythmParadiseGrooveHomePage() {
                 </h2>
               </div>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {topicPageList.map((topic) => (
+                {homeTopicLinks.map((topic) => (
                   <LocaleLink
                     key={topic.route}
                     href={topic.route}

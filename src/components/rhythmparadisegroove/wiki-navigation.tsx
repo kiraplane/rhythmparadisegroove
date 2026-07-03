@@ -2,9 +2,12 @@
 
 import { Badge } from '@/components/ui/badge';
 import {
+  flipsideEvolvedMinigameIndex,
   flipsideMinigameIndex,
+  frontsideEvolvedMinigameIndex,
   frontsideMinigameIndex,
 } from '@/data/rhythmparadisegroove/minigame-index';
+import { remixIndex } from '@/data/rhythmparadisegroove/remix-index';
 import { officialGameFacts } from '@/data/rhythmparadisegroove/sources';
 import { LocaleLink, useLocalePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
@@ -49,6 +52,25 @@ const flipsideMinigameLinks = flipsideMinigameIndex.map((minigame) => ({
   label: minigame.name,
 }));
 
+const frontsideEvolvedMinigameLinks = frontsideEvolvedMinigameIndex.map(
+  (minigame) => ({
+    href: `/minigames/${minigame.slug}`,
+    label: minigame.name,
+  })
+);
+
+const flipsideEvolvedMinigameLinks = flipsideEvolvedMinigameIndex.map(
+  (minigame) => ({
+    href: `/minigames/${minigame.slug}`,
+    label: minigame.name,
+  })
+);
+
+const remixLinks = remixIndex.map((remix) => ({
+  href: `/remixes/${remix.slug}`,
+  label: remix.name,
+}));
+
 const wikiNavGroups: WikiNavGroup[] = [
   {
     title: 'Start Here',
@@ -66,6 +88,7 @@ const wikiNavGroups: WikiNavGroup[] = [
     links: [
       { href: '/guides/perfect-solo-minigames', label: 'Perfect Solo Games' },
       { href: '/minigames', label: 'Minigames Hub' },
+      { href: '/remixes', label: 'Remixes Hub' },
       { href: '/guides/tv-calibration-input-lag', label: 'TV Calibration' },
       { href: '/walkthrough', label: 'Walkthrough Hub' },
     ],
@@ -79,6 +102,22 @@ const wikiNavGroups: WikiNavGroup[] = [
     title: 'Flipside Minigames',
     icon: Gamepad2,
     links: flipsideMinigameLinks,
+  },
+  {
+    title: 'Frontside Evolved 2',
+    icon: Sparkles,
+    links: frontsideEvolvedMinigameLinks,
+  },
+  {
+    title: 'Flipside Evolved 2',
+    icon: TimerReset,
+    links: flipsideEvolvedMinigameLinks,
+  },
+  {
+    title: 'Remixes',
+    icon: RadioTower,
+    links: [{ href: '/remixes', label: 'Remixes Hub' }, ...remixLinks],
+    activePrefixes: ['/remixes'],
   },
   {
     title: 'Guides',

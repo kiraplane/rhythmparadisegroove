@@ -10,9 +10,9 @@ export const topicPages = {
     eyebrow: 'Solo Hub',
     title: 'Rhythm Paradise Groove Minigames',
     seoTitle:
-      'Rhythm Paradise Groove Minigames - 30 Base Solo Guides and Perfect Tips',
+      'Rhythm Paradise Groove Minigames - 60 Solo Guides and Perfect Tips',
     seoDescription:
-      'Explore 30 verified Rhythm Paradise Groove base Solo minigame guides with cue notes, Perfect risks, Frontside and Flipside routing.',
+      'Explore 60 Rhythm Paradise Groove Solo minigame guides with base and evolved 2 cue notes, Perfect risks, Frontside and Flipside routing.',
     summary:
       'Use this hub to enter individual minigame pages, learn each cue in plain English, and return for Perfect attempts after setup is honest.',
     image: commonImage,
@@ -20,14 +20,15 @@ export const topicPages = {
     featuredRoutes: [
       '/guides/perfect-solo-minigames',
       '/guides/full-walkthrough-route',
+      '/remixes',
       '/setup',
     ],
     sections: [
       {
-        heading: 'Start with the verified base Solo pages',
+        heading: 'Start with the verified Solo practice pages',
         paragraphs: [
-          `Nintendo lists ${officialGameFacts.soloGameCount} in Rhythm Paradise Groove, so the full long-term database is bigger than one launch batch. The first verified version now starts with 30 base Solo minigame pages from the Frontside and Flipside route.`,
-          'Each page focuses on the player job: what cue to trust, what input to prepare, and what mistake usually breaks a Perfect run. Evolved versions, remixes, and multiplayer pages should expand after source confidence is strong enough.',
+          `Nintendo lists ${officialGameFacts.soloGameCount} in Rhythm Paradise Groove, so the full guide database needs more than a single catch-all article. The current verified version covers 30 base Solo minigame pages plus 30 evolved 2 pages from the Frontside and Flipside route.`,
+          'Each page focuses on the player job: what cue to trust, what input to prepare, and what mistake usually breaks a Perfect run. Remix pages are split into route-style guides because they combine several cue families rather than teaching one isolated pattern.',
         ],
       },
       {
@@ -48,7 +49,7 @@ export const topicPages = {
       {
         question: 'Does this wiki list every minigame yet?',
         answer:
-          'It now lists the 30 verified base Solo minigames as individual pages. Evolved versions, remixes, and multiplayer games should be added when enough source material is available.',
+          'It now lists 30 verified base Solo minigames, 30 evolved 2 versions, and 20 Remix route pages. Multiplayer-specific games should be added separately when source material is strong enough.',
       },
       {
         question: 'What is the best first minigame goal?',
@@ -78,6 +79,7 @@ export const topicPages = {
     featuredRoutes: [
       '/guides/full-walkthrough-route',
       '/minigames',
+      '/remixes',
       '/guides/beatspell-guide',
     ],
     sections: [

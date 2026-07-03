@@ -8,6 +8,9 @@ import { CHECKED_AT } from './sources';
 import type { DataSource, GuideFaq, GuideSection } from './types';
 
 export interface MinigameGuide extends MinigameIndexEntry {
+  variant: 'Base Solo' | 'Evolved 2';
+  baseSlug?: string;
+  baseName?: string;
   title: string;
   seoTitle: string;
   seoDescription: string;
@@ -27,6 +30,11 @@ interface MinigameArticleContent {
   body: GuideSection[];
 }
 
+type MinigameFaqInput = MinigameIndexEntry & {
+  variant: 'Base Solo' | 'Evolved 2';
+  baseName?: string;
+};
+
 const siteCover = '/rhythmparadisegroove/hero.png';
 
 export const minigameGuideSources: DataSource[] = [
@@ -37,6 +45,14 @@ export const minigameGuideSources: DataSource[] = [
     checkedAt: CHECKED_AT,
     confidence: 'medium',
     note: 'Used to verify the first 30 base Solo minigame names, Frontside/Flipside split, and high-level Perfect trouble spots. Advice here is rewritten as original player-facing guidance.',
+  },
+  {
+    type: 'competitor',
+    label: 'Gamereactor Solo structure note',
+    url: 'https://www.gamereactor.eu/rhythm-paradise-groove-guide-how-to-perfect-all-30-base-solo-mini-games-1741843/',
+    checkedAt: CHECKED_AT,
+    confidence: 'medium',
+    note: 'Used to verify that each base Solo minigame has an evolved "2" version and that 20 Remix levels complete the 80 Solo medal/master structure.',
   },
   {
     type: 'youtube',
@@ -67,6 +83,9 @@ const difficultyNotes: Record<MinigameDifficulty, string> = {
 
 const sourceNotes =
   'First-version minigame page built from the verified 30 base Solo list, Gamereactor Perfect guide notes, and launch-week gameplay walkthrough cross-checks.';
+
+const evolvedSourceNotes =
+  'First-version evolved minigame page built from the verified Solo structure: each base minigame has an evolved "2" version. The page uses the base cue family as the practice anchor and avoids claiming frame-perfect changes that still need deeper per-video timestamp verification.';
 
 const articleContent = {
   'hoop-trundling': {
@@ -1001,7 +1020,17 @@ const articleContent = {
   },
 } satisfies Record<MinigameSlug, MinigameArticleContent>;
 
-function getDefaultFaq(minigame: MinigameIndexEntry): GuideFaq[] {
+function getDefaultFaq(minigame: MinigameFaqInput): GuideFaq[] {
+  let cleanupAnswer: string;
+
+  if (minigame.variant === 'Evolved 2') {
+    cleanupAnswer = `${minigame.name} is better after the original ${minigame.baseName} feels stable. Use the original page as a warm-up, then return here for the stricter cue spacing.`;
+  } else if (minigame.difficulty === 'Beginner') {
+    cleanupAnswer = `${minigame.name} is one of the friendlier cleanup targets once your setup is stable. Use it to build confidence before moving to stricter cue-switching pages.`;
+  } else {
+    cleanupAnswer = `${minigame.name} is better after a warm-up clear and a named mistake. If the miss feels random, practice the cue family first instead of spending Perfect windows.`;
+  }
+
   return [
     {
       question: `How do I Perfect ${minigame.name}?`,
@@ -1013,10 +1042,7 @@ function getDefaultFaq(minigame: MinigameIndexEntry): GuideFaq[] {
     },
     {
       question: `Is ${minigame.name} a good early cleanup target?`,
-      answer:
-        minigame.difficulty === 'Beginner'
-          ? `${minigame.name} is one of the friendlier cleanup targets once your setup is stable. Use it to build confidence before moving to stricter cue-switching pages.`
-          : `${minigame.name} is better after a warm-up clear and a named mistake. If the miss feels random, practice the cue family first instead of spending Perfect windows.`,
+      answer: cleanupAnswer,
     },
   ];
 }
@@ -1034,12 +1060,59 @@ function getRelatedRoutes(index: number) {
   ].filter(Boolean) as string[];
 }
 
-export const minigames: MinigameGuide[] = minigameIndex.map(
+function getEvolvedRelatedRoutes(index: number, base: MinigameIndexEntry) {
+  const previous = minigameIndex[index - 1];
+  const next = minigameIndex[index + 1];
+
+  return [
+    '/minigames',
+    `/minigames/${base.slug}`,
+    previous ? `/minigames/${previous.slug}-2` : null,
+    next ? `/minigames/${next.slug}-2` : null,
+    '/remixes',
+    '/guides/perfect-solo-minigames',
+    '/setup',
+  ].filter(Boolean) as string[];
+}
+
+function getEvolvedBody(minigame: MinigameIndexEntry): GuideSection[] {
+  return [
+    {
+      heading: `What changes after ${minigame.name}`,
+      paragraphs: [
+        `${minigame.name} 2 is the evolved version, so the starting point is not a brand-new idea. The core cue is still ${minigame.cueFamily}, and the response still grows out of ${minigame.inputStyle}. What changes is the amount of trust the game expects from you. The evolved version gives less room for fuzzy timing, late recognition, and recovery by luck. If the original felt barely controlled, this page will expose that quickly.`,
+        `Treat the first clear as a comparison run. Ask whether the miss came from the same habit as the original ${minigame.name}, or from a new pressure point. That distinction matters. If the old mistake is still present, go back to the base page and stabilize it. If the old cue is clean but the evolved version adds pressure, stay here and practice the new spacing.`,
+      ],
+    },
+    {
+      heading: 'Practice the stricter cue before chasing medals',
+      paragraphs: [
+        `The most useful first drill is simple: play one run where the only goal is hearing the evolved ${minigame.cueFamily}. Do not judge the score. Do not immediately chase a Perfect. Listen for how the cue is framed, how fast you need to commit, and whether your hand keeps trying to answer with the base-game habit. The evolved page is usually teaching you to keep the same idea while removing lazy timing.`,
+        `Your input focus should be ${minigame.inputStyle}, but cleaner. Presses should feel smaller, earlier-recognized, and less emotional. When a cue surprises you, avoid mashing to save the run. Mashing hides the useful information. A clean miss that you understand is better than a lucky clear that teaches nothing.`,
+      ],
+    },
+    {
+      heading: 'Perfect cleanup route',
+      paragraphs: [
+        `The Perfect risk is ${minigame.perfectRisk}. In the evolved version, that risk becomes sharper because your old muscle memory can be close enough to feel right and still be wrong. Before spending a Perfect window, do one warm-up on the original ${minigame.name}, then one clear of ${minigame.name} 2. If those two runs feel like the same cue spoken with different pressure, you are ready to attempt cleanup.`,
+        'Stop after a short set if the misses start moving around. Evolved pages are good at making tired players overcorrect: first late, then early, then wrong cue. When that happens, return to the base page or switch to a Remix that uses the same cue family. The point is not to prove toughness; the point is to make the evolved rhythm boring enough that the Perfect attempt feels ordinary.',
+      ],
+      bullets: [
+        `Warm up with ${minigame.name} before serious attempts.`,
+        `Name whether the miss is old ${minigame.name} habit or new evolved pressure.`,
+        'Use Remixes as a stress test only after the evolved cue is stable.',
+      ],
+    },
+  ];
+}
+
+export const baseMinigames: MinigameGuide[] = minigameIndex.map(
   (minigame, index) => {
     const content = articleContent[minigame.slug as MinigameSlug];
 
     return {
       ...minigame,
+      variant: 'Base Solo',
       title: `${minigame.name} Guide`,
       seoTitle: `${minigame.name} Guide - Rhythm Paradise Groove Perfect Tips`,
       seoDescription: content.seoDescription,
@@ -1049,17 +1122,62 @@ export const minigames: MinigameGuide[] = minigameIndex.map(
       sourceStrategy: 'community_crosscheck',
       sourceNotes,
       body: content.body,
-      faq: getDefaultFaq(minigame),
+      faq: getDefaultFaq({ ...minigame, variant: 'Base Solo' }),
       relatedRoutes: getRelatedRoutes(index),
     };
   }
 );
 
-export const frontsideMinigames = minigames.filter(
+export const evolvedMinigames: MinigameGuide[] = minigameIndex.map(
+  (minigame, index) => {
+    const evolvedMinigame = {
+      ...minigame,
+      slug: `${minigame.slug}-2`,
+      name: `${minigame.name} 2`,
+      cueFamily: `evolved ${minigame.cueFamily}`,
+      inputStyle: `stricter ${minigame.inputStyle}`,
+      perfectRisk: `carrying ${minigame.name} muscle memory into the evolved timing`,
+      oneLine: `The evolved version of ${minigame.name} keeps the core idea but asks for tighter cue recognition and cleaner recovery.`,
+      variant: 'Evolved 2' as const,
+      baseSlug: minigame.slug,
+      baseName: minigame.name,
+    };
+
+    return {
+      ...evolvedMinigame,
+      title: `${minigame.name} 2 Guide`,
+      seoTitle: `${minigame.name} 2 Guide - Rhythm Paradise Groove Perfect Tips`,
+      seoDescription: `Learn ${minigame.name} 2 with evolved cue timing, original-stage warm-up advice, Perfect risks, and Remix practice routes.`,
+      summary: `${minigame.name} 2 is the evolved version of ${minigame.name}. Use the original cue as your anchor, then practice the stricter timing before chasing Perfects.`,
+      updatedAt: CHECKED_AT,
+      coverImageUrl: siteCover,
+      sourceStrategy: 'community_crosscheck',
+      sourceNotes: evolvedSourceNotes,
+      body: getEvolvedBody(minigame),
+      faq: getDefaultFaq(evolvedMinigame),
+      relatedRoutes: getEvolvedRelatedRoutes(index, minigame),
+    };
+  }
+);
+
+export const minigames: MinigameGuide[] = [
+  ...baseMinigames,
+  ...evolvedMinigames,
+];
+
+export const frontsideMinigames = baseMinigames.filter(
   (minigame) => minigame.side === 'Frontside'
 );
 
-export const flipsideMinigames = minigames.filter(
+export const flipsideMinigames = baseMinigames.filter(
+  (minigame) => minigame.side === 'Flipside'
+);
+
+export const frontsideEvolvedMinigames = evolvedMinigames.filter(
+  (minigame) => minigame.side === 'Frontside'
+);
+
+export const flipsideEvolvedMinigames = evolvedMinigames.filter(
   (minigame) => minigame.side === 'Flipside'
 );
 
@@ -1068,16 +1186,22 @@ export function getMinigameGuide(slug: string) {
 }
 
 export function getAdjacentMinigames(slug: string) {
-  const currentIndex = minigames.findIndex(
-    (minigame) => minigame.slug === slug
-  );
+  const current = getMinigameGuide(slug);
+
+  if (!current) {
+    return { previous: undefined, next: undefined };
+  }
+
+  const sequence =
+    current.variant === 'Evolved 2' ? evolvedMinigames : baseMinigames;
+  const currentIndex = sequence.findIndex((minigame) => minigame.slug === slug);
 
   if (currentIndex === -1) {
     return { previous: undefined, next: undefined };
   }
 
   return {
-    previous: minigames[currentIndex - 1],
-    next: minigames[currentIndex + 1],
+    previous: sequence[currentIndex - 1],
+    next: sequence[currentIndex + 1],
   };
 }
