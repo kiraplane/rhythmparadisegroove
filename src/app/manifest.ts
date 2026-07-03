@@ -23,7 +23,7 @@ import type { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: defaultMessages.Metadata.name,
-    short_name: 'Groove Wiki',
+    short_name: 'Groove',
     description: defaultMessages.Metadata.description,
     start_url: '/',
     display: 'standalone',

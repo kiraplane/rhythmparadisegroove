@@ -24,8 +24,8 @@ export function Logo({ className }: { className?: string }) {
   return (
     <Image
       src={logo}
-      alt="Rhythm Paradise Groove Wiki logo"
-      title="Rhythm Paradise Groove Wiki"
+      alt="Rhythm Paradise Groove logo"
+      title="Rhythm Paradise Groove"
       width={96}
       height={96}
       priority

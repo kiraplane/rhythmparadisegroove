@@ -13,7 +13,7 @@ export async function generateMetadata({
   return constructMetadata({
     title: 'Rhythm Paradise Groove Wiki - Minigames Perfects and Guides',
     description:
-      'Rhythm Paradise Groove Wiki covers Perfect routes, minigame cues, TV calibration, demo setup, Beatspell, multiplayer, and Switch timing.',
+      'Rhythm Paradise Groove wiki and guides cover Perfect routes, minigame cues, TV calibration, demo setup, Beatspell, multiplayer, and Switch timing.',
     locale,
     pathname: '',
     image: '/rhythmparadisegroove/og-image.png',

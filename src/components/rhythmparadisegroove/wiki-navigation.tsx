@@ -1,6 +1,10 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
+import {
+  flipsideMinigameIndex,
+  frontsideMinigameIndex,
+} from '@/data/rhythmparadisegroove/minigame-index';
 import { officialGameFacts } from '@/data/rhythmparadisegroove/sources';
 import { LocaleLink, useLocalePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
@@ -35,6 +39,16 @@ interface WikiNavGroup {
   activePrefixes?: string[];
 }
 
+const frontsideMinigameLinks = frontsideMinigameIndex.map((minigame) => ({
+  href: `/minigames/${minigame.slug}`,
+  label: minigame.name,
+}));
+
+const flipsideMinigameLinks = flipsideMinigameIndex.map((minigame) => ({
+  href: `/minigames/${minigame.slug}`,
+  label: minigame.name,
+}));
+
 const wikiNavGroups: WikiNavGroup[] = [
   {
     title: 'Start Here',
@@ -55,6 +69,16 @@ const wikiNavGroups: WikiNavGroup[] = [
       { href: '/guides/tv-calibration-input-lag', label: 'TV Calibration' },
       { href: '/walkthrough', label: 'Walkthrough Hub' },
     ],
+  },
+  {
+    title: 'Frontside Minigames',
+    icon: ListMusic,
+    links: frontsideMinigameLinks,
+  },
+  {
+    title: 'Flipside Minigames',
+    icon: Gamepad2,
+    links: flipsideMinigameLinks,
   },
   {
     title: 'Guides',

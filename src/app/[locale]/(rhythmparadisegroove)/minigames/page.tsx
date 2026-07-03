@@ -1,10 +1,7 @@
-import { TopicPage } from '@/components/rhythmparadisegroove/topic-page';
-import { getTopicPage } from '@/data/rhythmparadisegroove/topics';
+import { MinigamesPage as MinigamesHubPage } from '@/components/rhythmparadisegroove/minigames-page';
 import { constructMetadata } from '@/lib/metadata';
 import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
-
-const topic = getTopicPage('minigames');
 
 export async function generateMetadata({
   params,
@@ -13,14 +10,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   return constructMetadata({
-    title: topic.seoTitle,
-    description: topic.seoDescription,
+    title:
+      'Rhythm Paradise Groove Minigames - 30 Base Solo Guides and Perfect Tips',
+    description:
+      'Browse 30 verified Rhythm Paradise Groove base Solo minigame guides with cue notes, Perfect risks, Frontside and Flipside routing.',
     locale,
-    pathname: topic.route,
+    pathname: '/minigames',
     image: '/rhythmparadisegroove/og-image.png',
   });
 }
 
 export default function MinigamesPage() {
-  return <TopicPage topic={topic} />;
+  return <MinigamesHubPage />;
 }

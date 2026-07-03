@@ -4,6 +4,7 @@ import { JsonLd } from '@/components/seo/json-ld';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { guides, siteDescription } from '@/data/rhythmparadisegroove/guides';
+import { minigameIndex } from '@/data/rhythmparadisegroove/minigame-index';
 import {
   officialGameFacts,
   officialQuickLinks,
@@ -50,7 +51,7 @@ const primaryLinks = [
   },
   {
     title: 'Minigames',
-    body: 'Build per-game pages from cue families and real search demand.',
+    body: 'Open 30 base Solo pages with cue notes and Perfect risks.',
     href: '/minigames',
     icon: ListMusic,
   },
@@ -74,6 +75,26 @@ const keywordLinks = [
     href: '/guides/perfect-solo-minigames',
   },
   { keyword: 'rhythm paradise groove minigames', href: '/minigames' },
+  {
+    keyword: 'hoop trundling guide',
+    href: '/minigames/hoop-trundling',
+  },
+  {
+    keyword: 'brolly good show perfect',
+    href: '/minigames/brolly-good-show',
+  },
+  {
+    keyword: 'sneezy moon guide',
+    href: '/minigames/sneezy-moon',
+  },
+  {
+    keyword: 'alien alphabet perfect',
+    href: '/minigames/alien-alphabet',
+  },
+  {
+    keyword: 'synchro wings guide',
+    href: '/minigames/synchro-wings',
+  },
   { keyword: 'rhythm paradise groove demo', href: '/demo' },
   {
     keyword: 'rhythm paradise groove beatspell',
@@ -117,11 +138,26 @@ const latestUpdateItems = [
     body: 'The site targets Rhythm Paradise Groove first while mapping Rhythm Heaven Groove alias searches.',
   },
   {
-    title: 'Perfect guide path live',
-    date: '2026-07-02',
-    body: 'Perfect, calibration, demo, walkthrough, Beatspell, and multiplayer routes are ready for launch coverage.',
+    title: '30 minigame pages live',
+    date: '2026-07-03',
+    body: 'Frontside and Flipside base Solo minigames now have individual cue, practice, and Perfect-risk pages.',
   },
 ];
+
+const popularMinigameSlugs = [
+  'hoop-trundling',
+  'brolly-good-show',
+  'disc-dog',
+  'sneezy-moon',
+  'alien-alphabet',
+  'lightning-bolting',
+  'football-dreams',
+  'synchro-wings',
+];
+
+const popularMinigames = popularMinigameSlugs.flatMap((slug) =>
+  minigameIndex.filter((minigame) => minigame.slug === slug)
+);
 
 export function RhythmParadiseGrooveHomePage() {
   const latestGuides = guides.slice(0, 6);
@@ -186,12 +222,12 @@ export function RhythmParadiseGrooveHomePage() {
                 </Badge>
               </div>
               <h1 className="font-display text-4xl font-black leading-tight sm:text-5xl md:text-6xl">
-                Rhythm Paradise Groove Wiki
+                Rhythm Paradise Groove
               </h1>
               <p className="max-w-2xl text-[#4B3E68] text-lg leading-8">
-                Perfect routes, minigame cues, TV calibration, demo setup,
-                Beatspell, multiplayer, and Switch timing advice for the 2026
-                Rhythm game.
+                A wiki and guides hub for Perfect routes, minigame cues, TV
+                calibration, demo setup, Beatspell, multiplayer, and Switch
+                timing advice for the 2026 rhythm game.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button
@@ -381,6 +417,71 @@ export function RhythmParadiseGrooveHomePage() {
                       {item.body}
                     </p>
                   </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <div className="mb-4 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+                <div>
+                  <Badge className="bg-[#F24C7C] text-white">
+                    Popular minigames
+                  </Badge>
+                  <h2 className="mt-3 font-display text-3xl font-black">
+                    Jump into the guides players need first
+                  </h2>
+                  <p className="mt-2 max-w-3xl text-[#5F5378] text-sm leading-6">
+                    These are good homepage shortcuts because they cover early
+                    timing checks, sudden reaction walls, strict Perfect risks,
+                    and Flipside phrase-copy practice.
+                  </p>
+                </div>
+                <LocaleLink
+                  href="/minigames"
+                  className="font-semibold text-[#D93969] text-sm hover:underline"
+                >
+                  All 30 minigames
+                </LocaleLink>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2">
+                {popularMinigames.map((minigame) => (
+                  <LocaleLink
+                    key={minigame.slug}
+                    href={`/minigames/${minigame.slug}`}
+                    className="group rounded-lg border border-[#201736]/15 bg-white p-4 transition hover:border-[#F24C7C] hover:shadow-sm"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap gap-2">
+                          <Badge
+                            variant="outline"
+                            className="border-[#201736]/15 bg-[#FFF8E8] text-[#5F5378]"
+                          >
+                            {minigame.side} #{minigame.order}
+                          </Badge>
+                          <Badge
+                            variant="outline"
+                            className="border-[#00A7A7]/30 bg-[#C7FFF3] text-[#0D5F63]"
+                          >
+                            {minigame.difficulty}
+                          </Badge>
+                        </div>
+                        <h3 className="mt-3 font-display text-xl font-bold text-[#201736] group-hover:text-[#D93969]">
+                          {minigame.name}
+                        </h3>
+                      </div>
+                      <ArrowRight className="mt-1 size-4 shrink-0 text-[#00A7A7] transition group-hover:translate-x-0.5" />
+                    </div>
+                    <p className="mt-2 text-[#5F5378] text-sm leading-6">
+                      {minigame.oneLine}
+                    </p>
+                    <p className="mt-3 text-[#4B3E68] text-xs leading-5">
+                      <span className="font-semibold text-[#201736]">
+                        Perfect risk:
+                      </span>{' '}
+                      {minigame.perfectRisk}
+                    </p>
+                  </LocaleLink>
                 ))}
               </div>
             </section>

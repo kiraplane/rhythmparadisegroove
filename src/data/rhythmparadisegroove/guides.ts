@@ -1,3 +1,4 @@
+import { minigames } from './minigames';
 import { CHECKED_AT, officialGameFacts, siteDescription } from './sources';
 import type { Guide, GuideCategory, GuideVideo } from './types';
 
@@ -93,6 +94,9 @@ export const relatedRouteLabels: Record<string, string> = {
   '/guides/multiplayer-party-guide': 'Multiplayer Guide',
   '/guides/full-walkthrough-route': 'Full Walkthrough Route',
   '/guides/rhythm-heaven-vs-paradise-name': 'Name Difference',
+  ...Object.fromEntries(
+    minigames.map((minigame) => [`/minigames/${minigame.slug}`, minigame.name])
+  ),
 };
 
 export const guides: Guide[] = [
@@ -727,4 +731,5 @@ export const allCoreRoutes = [
   '/links',
   '/disclaimer',
   ...guides.map((guide) => `/guides/${guide.slug}`),
+  ...minigames.map((minigame) => `/minigames/${minigame.slug}`),
 ];

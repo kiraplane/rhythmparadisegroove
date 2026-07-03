@@ -63,7 +63,7 @@ export function useNavbarLinks(): NestedMenuItem[] {
       items: [
         {
           title: 'Minigames',
-          description: 'Solo-game cues, Perfect prep, and future detail pages.',
+          description: '30 base Solo pages with cues and Perfect risks.',
           href: Routes.Minigames,
           external: false,
           icon: <ListMusic className="size-4" />,

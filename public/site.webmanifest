@@ -1,7 +1,7 @@
 {
-  "name": "Rhythm Paradise Groove Wiki",
-  "short_name": "Groove Wiki",
-  "description": "Rhythm Paradise Groove Wiki for Perfect routes, minigame cues, TV calibration, demo setup, Beatspell, multiplayer, and Switch timing.",
+  "name": "Rhythm Paradise Groove",
+  "short_name": "Groove",
+  "description": "Rhythm Paradise Groove wiki and guides for Perfect routes, minigame cues, TV calibration, demo setup, Beatspell, multiplayer, and Switch timing.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

@@ -10,11 +10,11 @@ export const topicPages = {
     eyebrow: 'Solo Hub',
     title: 'Rhythm Paradise Groove Minigames',
     seoTitle:
-      'Rhythm Paradise Groove Minigames - Solo Games, Perfects and Remix Cues',
+      'Rhythm Paradise Groove Minigames - 30 Base Solo Guides and Perfect Tips',
     seoDescription:
-      'Explore Rhythm Paradise Groove minigames with solo-game routing, Perfect practice, rhythm cue notes, remix prep, and future per-minigame guide coverage.',
+      'Explore 30 verified Rhythm Paradise Groove base Solo minigame guides with cue notes, Perfect risks, Frontside and Flipside routing.',
     summary:
-      'Use this hub to treat minigames as cue families: learn the call, stabilize the response, then return for Perfect attempts after setup is honest.',
+      'Use this hub to enter individual minigame pages, learn each cue in plain English, and return for Perfect attempts after setup is honest.',
     image: commonImage,
     updatedAt: CHECKED_AT,
     featuredRoutes: [
@@ -24,17 +24,17 @@ export const topicPages = {
     ],
     sections: [
       {
-        heading: 'Build around cue families before individual pages',
+        heading: 'Start with the verified base Solo pages',
         paragraphs: [
-          `Nintendo lists ${officialGameFacts.soloGameCount} in Rhythm Paradise Groove, so a complete one-page-per-minigame database would be large. The launch version should avoid thin pages and start by grouping the most important player jobs: clear route, Perfect practice, remix recognition, and timing setup.`,
-          'As GSC data and community guide demand appear, the strongest individual minigames can become their own pages. Until then, this hub should point players toward the routes that solve repeated problems rather than pretending every minigame already has complete data.',
+          `Nintendo lists ${officialGameFacts.soloGameCount} in Rhythm Paradise Groove, so the full long-term database is bigger than one launch batch. The first verified version now starts with 30 base Solo minigame pages from the Frontside and Flipside route.`,
+          'Each page focuses on the player job: what cue to trust, what input to prepare, and what mistake usually breaks a Perfect run. Evolved versions, remixes, and multiplayer pages should expand after source confidence is strong enough.',
         ],
       },
       {
-        heading: 'What a future minigame page should include',
+        heading: 'What each minigame page includes',
         paragraphs: [
-          'A useful minigame page should name the cue, input type, fake-out, common late or early miss, Perfect danger moment, and related remix pattern. It should not be a plot summary or a copied transcript.',
-          'The strongest future pages will be the ones players actually search: Perfect tips, walkthrough, how to beat, all cues, and remix connection pages for specific games.',
+          'A useful minigame page should name the cue, input type, fake-out, common late or early miss, and Perfect danger moment. It should not be a plot summary or a copied transcript.',
+          'The current pages are written as player-facing practice notes, so a stuck player can read one page, replay the stage, and know what to listen for on the next attempt.',
         ],
         bullets: [
           'Cue phrase: what the player should listen for.',
@@ -48,7 +48,7 @@ export const topicPages = {
       {
         question: 'Does this wiki list every minigame yet?',
         answer:
-          'Not as thin pages. The launch site starts with high-intent hubs and will expand individual minigame pages when search demand and source confidence support them.',
+          'It now lists the 30 verified base Solo minigames as individual pages. Evolved versions, remixes, and multiplayer games should be added when enough source material is available.',
       },
       {
         question: 'What is the best first minigame goal?',
