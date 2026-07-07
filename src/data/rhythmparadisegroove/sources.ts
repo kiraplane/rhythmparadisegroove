@@ -1,7 +1,7 @@
 import type { DataSource } from './types';
 
-export const CHECKED_AT = '2026-07-02';
-export const OFFICIAL_CHECKED_AT = '2026-07-02';
+export const CHECKED_AT = '2026-07-07';
+export const OFFICIAL_CHECKED_AT = '2026-07-07';
 
 export const officialGameFacts = {
   name: 'Rhythm Paradise Groove',
