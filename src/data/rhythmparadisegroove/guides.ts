@@ -95,6 +95,7 @@ export const relatedRouteLabels: Record<string, string> = {
   '/guides/tv-calibration-input-lag': 'TV Calibration',
   '/guides/demo-save-transfer': 'Demo and Save Transfer',
   '/guides/beatspell-guide': 'Beatspell Guide',
+  '/guides/beatspell-demo-guide': 'Beatspell Demo Guide',
   '/guides/multiplayer-party-guide': 'Multiplayer Guide',
   '/guides/full-walkthrough-route': 'Full Walkthrough Route',
   '/guides/rhythm-heaven-vs-paradise-name': 'Name Difference',
@@ -737,6 +738,83 @@ export const guides: Guide[] = [
         question: 'Should old Rhythm Heaven guides be copied?',
         answer:
           'No. Older games can provide context, but current pages must be verified against the 2026 Switch release.',
+      },
+    ],
+  },
+  {
+    slug: 'beatspell-demo-guide',
+    title: 'Beatspell Demo Guide',
+    seoTitle:
+      'Rhythm Paradise Groove Beatspell Demo Guide - Mode Tips and Timing',
+    seoDescription:
+      'Use the Rhythm Paradise Groove Beatspell demo guide for timing setup, mode expectations, practice order, Switch play, and common early mistakes.',
+    summary:
+      'A focused bridge between the free demo and Beatspell mode: test timing first, learn the mode’s cue language, and avoid treating it like a normal solo minigame.',
+    category: 'Demo',
+    difficulty: 'Beginner',
+    coverImageUrl: videoCover(videos.beatspell),
+    publishedAt: CHECKED_AT,
+    updatedAt: CHECKED_AT,
+    sourceStrategy: 'youtube_explainer',
+    sourceNotes:
+      'Added after current video and search signals connected Beatspell with demo testing and timing setup.',
+    video: videos.beatspell,
+    videoSearchQueries: [
+      'Rhythm Paradise Groove Beatspell demo',
+      'Rhythm Heaven Groove Beatspell guide',
+      'Rhythm Paradise Groove demo Beatspell',
+    ],
+    tags: ['Beatspell', 'Demo', 'Timing'],
+    relatedRoutes: [
+      '/demo',
+      '/modes',
+      '/setup',
+      '/guides/beatspell-guide',
+      '/guides/demo-save-transfer',
+    ],
+    body: [
+      {
+        heading: 'Use the demo to test timing before judging Beatspell',
+        paragraphs: [
+          'Beatspell can feel strange if your display or controller timing is off. Before treating a miss as a rhythm problem, run the demo in the setup you actually plan to use: handheld, docked TV, wired controller, or wireless controller.',
+          'If the same cue feels late across several attempts, open the timing setup route first. Rhythm games punish tiny latency differences, and Beatspell is easier to learn when the input window feels honest.',
+        ],
+        bullets: [
+          'Test handheld and TV mode separately if both are available.',
+          'Use headphones or a consistent speaker setup while learning cues.',
+          'Do not chase Perfect attempts before the timing setup feels stable.',
+        ],
+      },
+      {
+        heading: 'Learn the cue language, not only the pattern',
+        paragraphs: [
+          'Beatspell should be practiced like a mode with its own vocabulary. Listen for what the game is asking you to anticipate, then watch the visual prompt only as backup. If you memorize the screen without hearing the cue, the next variation will feel unfair.',
+          'A clean practice loop is three attempts with sound focus, one attempt with eyes closed on the easy parts, then one normal attempt. That makes the mode less dependent on visual panic.',
+        ],
+      },
+      {
+        heading: 'Know when to leave the demo route',
+        paragraphs: [
+          'The demo is best for deciding whether the timing, mode feel, and Switch setup work for you. Once the cue language feels readable, move into the broader Beatspell guide and full mode pages.',
+          'Do not over-practice the demo until it hides your weak spots. If you can pass comfortably but fail later variants, the issue is usually adaptation, not the first pattern.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Should I play Beatspell in handheld or TV mode?',
+        answer:
+          'Use whichever setup gives more consistent timing. Test both because TV audio delay can change how Beatspell feels.',
+      },
+      {
+        question: 'Is Beatspell part of the demo?',
+        answer:
+          'Use the demo as a timing and mode-feel check. Exact demo contents can vary by region or event, so use official Nintendo pages for availability.',
+      },
+      {
+        question: 'What should I fix first if Beatspell feels unfair?',
+        answer:
+          'Check audio/display timing before blaming the pattern. Then practice cue recognition instead of only watching visuals.',
       },
     ],
   },

@@ -19,6 +19,6 @@ rhythm paradise groove
 
 5.当前已经有一些以rhythm heaven groove为关键词的游戏攻略站，可以参考其内容，看看是否值得借鉴。
 
-6.开发完成后在github上创建仓库feedthepit，将本项目上传
-7.在cloudflare上面的worker创建项目feedthepit部署并关联域名，域名我已经加好
+6.开发完成后在github上创建仓库rhythmparadisegroove，将本项目上传
+7.在cloudflare上面的worker创建项目rhythmparadisegroove部署并关联域名，域名我已经加好
 8.去ga上创建媒体资源
