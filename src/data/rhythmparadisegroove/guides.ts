@@ -504,6 +504,26 @@ export const guides: Guide[] = [
           'That mode-switching habit matters because Rhythm Paradise Groove has many side activities. The best players keep timing sharp without turning every session into one narrow medal chase.',
         ],
       },
+      {
+        heading: 'Recover during high-speed spell strings',
+        paragraphs: [
+          'The cursor moves around four points of a diamond, but a spell does not have to begin at the top point. In faster encounters, read the spell as a repeating input recipe and re-enter on the next clean beat instead of trying to repair every missed input mid-string.',
+          'Use the top point as a visual reset marker when the pattern gets away from you. One controlled empty beat is usually cheaper than several panic inputs that break the next spell too.',
+        ],
+        bullets: [
+          'Watch the glowing spell cue before committing to an element.',
+          'Restart from a clean diamond point after a miss.',
+          'Mix damage and healing inside the same rotation when the pattern allows it.',
+          'Upgrade damage first when base healing already keeps the run stable.',
+        ],
+      },
+      {
+        heading: 'Boss timing is an endurance check',
+        paragraphs: [
+          'Do not let a large boss health bar force faster inputs. Keep casting the effective damage spell, heal before the next dangerous sequence, and let consistent rotations win the encounter.',
+          'For a first clear, survival matters more than score. For a five-star replay, improve three things separately: finish faster, preserve all three hearts, and convert more casts into Perfect inputs.',
+        ],
+      },
     ],
     faq: [
       {
