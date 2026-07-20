@@ -267,7 +267,7 @@ export function RhythmParadiseGrooveHomePage() {
           'Official Nintendo UK overview trailer for Rhythm Paradise Groove, used as a source reference for the 2026 Switch rhythm game.',
         thumbnailUrl: 'https://i.ytimg.com/vi/dIqElv-ewbg/hqdefault.jpg',
         embedUrl: 'https://www.youtube.com/embed/dIqElv-ewbg',
-        uploadDate: '2026-04-02T00:00:00+00:00',
+        uploadDate: '2026-06-16T00:00:00+00:00',
       },
     ],
   };
